@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+<title>Detalles sala, sevilla</title>
+<meta charset="utf-8" />
+<meta name="description"
+	content="Registro y login usuario en mybooks online, sevilla.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel='stylesheet' href='/style/fullcalendar.css' />
+<script src='/script/jquery.min.js'></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<script src='/script/moment.min.js'></script>
+<script src='/script/fullcalendar.js'></script>
+<script src='/script/calendario.js'></script>
+<<<<<<< HEAD
+<link rel='stylesheet' href='/style/proyecto.css' />
+<link rel='stylesheet' href='/style/calendario.css' />
+=======
+<link rel='stylesheet' href='/style/proyecto.css'/>
+<!-- <link rel='stylesheet' href='/style/calendario.css'/>-->
+
+>>>>>>> c2b34f0c3e1a837d33067229616bb5c977239d13
+</head>
+<body>
+	<div th:insert="~{menu :: menuAdmin}"></div>
+
+
+
+
+
+
+	<!-- CALENDARIO -->
+	<div id="calendar"></div>
+	<div th:each="reserva : ${listaReservas}">
+
+		<span class="fechasInicio" style="visibility: hidden;"
+			th:text="${reserva.fechaHora}"></span> <span class="fechasFinal"
+			style="visibility: hidden;" th:text="${reserva.fechaHora}"></span>
+
+	</div>
+
+
+
+	<!-- FORMULARIO RESERVAR FECHA -->
+
+	<!-- Default form contact -->
+	<div class="row">
+		<div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 offset-lg-3 offset-md-3 offset-xl-3">
+		<form
+			id="reservarSala" class="form rounded" role="form" autocomplete="off"
+								method="POST" th:action="@{/usuario/reservarSala}" th:object="${beanReserva}">
+
+			<h2 class="h4 mb-4">Reservar sala</h2>
+
+
+
+			<!-- select salas -->
+			<label class="text-left">Elija una sala</label> <select
+				class="browser-default custom-select mb-4">
+
+				<option th:each="type : ${listaSalas}" th:value="${{type.nombre}}"
+					th:text="${type.nombre}" th:field="*{nombreSala}">No hay salas</option>
+
+			</select>
+			<!-- FECHA Y HORA INICIO -->
+
+			<div class="row">
+
+				<div class="col-6 col-sm-4 col-md-1 col-lg-1 ">
+					<p>Dia inicio</p>
+					<input data-format="MM/dd/yyyy HH:mm:ss PP" type="date" th:field="*{diaInicio}"></input> <span
+						class="add-on input-xl"> <i data-time-icon="icon-time"
+						data-date-icon="icon-calendar"> </i>
+				</div>
+
+				<div class="col-6 col-sm-4 col-md-1 col-lg-1 col-xl-1 col-xl-1 offset-md-1 offset-lg-1 offset-xl-1">
+					<p>Hora inicio</p>
+					</span> <input data-format="MM/dd/yyyy HH:mm:ss PP" type="time" th:field="*{horaInicio}"></input> <span
+						class="add-on input-xl"> <i data-time-icon="icon-time"
+						data-date-icon="icon-calendar"> </i>
+					</span>
+				</div>
+
+				<div class="col-6 col-sm-4 col-md-1 col-lg-1 col-xl-1">
+					<p>Dia fin reserva</p>
+					<input data-format="MM/dd/yyyy HH:mm:ss PP" type="date" th:field="*{diaFin}"></input> <span
+						class="add-on input-xl"> <i data-time-icon="icon-time"
+						data-date-icon="icon-calendar"> </i>
+				</div>
+
+				<div class="col-6 col-sm-4 col-md-1 col-lg-1 col-xl-1 col-xl-1 offset-md-1 offset-lg-1 offset-xl-1">
+					<p>Hora fin reserva</p>
+					</span> <input data-format="MM/dd/yyyy HH:mm:ss PP" type="time" th:field="*{horaFin}"></input> <span
+						class="add-on input-xl"> <i data-time-icon="icon-time"
+						data-date-icon="icon-calendar"> </i>
+					</span>
+				</div>
+
+			</div>
+			<!-- FECHA Y HORA INICIO -->
+
+
+
+
+
+
+
+			<!-- Send button -->
+			<button class="btn btn-info btn-block" type="submit">Send</button>
+
+		</form>
+		<!-- Default form contact -->
+	</div>
+	<!-- FIN FORMULARIO RESERVAR FECHA -->
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+var message = [[${message}]];
+alert(message);
+
+/*]]>*/
+</script>
+</body>
+</html>

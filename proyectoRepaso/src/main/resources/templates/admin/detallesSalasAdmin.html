@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+<title>Detalles sala, sevilla</title>
+<meta charset="utf-8" />
+<meta name="description"
+	content="Registro y login usuario en mybooks online, sevilla.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+	rel="stylesheet">
+<link rel='stylesheet' href='/style/fullcalendar.css' />
+<script src='/script/jquery.min.js'></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<script src='/script/moment.min.js'></script>
+<script src='/script/fullcalendar.js'></script>
+<script src='/script/calendario.js'></script>
+
+<link rel='stylesheet' href='/style/proyecto.css' />
+<link rel='stylesheet' href='/style/calendario.css' />
+
+</head>
+<body>
+	<header>
+
+		<div th:insert="~{footerSuperior :: footerSuperior}"></div>
+	</header>
+	<div th:insert="~{menu :: menuAdmin}"></div>
+	<div class="alert alert-danger alert-dismissible fade show"
+		th:if="${errorFechaFinalMayorInicial} == 1">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<span> No puede introducir una fecha final anterior a la
+			inicial.</span>
+	</div>
+	<div class="alert alert-danger alert-dismissible fade show"
+		th:if="${errorFechaMenor} == 1">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<span> No puede introducir una fecha anterior a la de ahora.</span>
+	</div>
+	<div class="alert alert-danger alert-dismissible fade show"
+		th:if="${errorFechaSolapa} == 1">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<span>Ya hay una reserva en esa fecha.</span>
+	</div>
+
+
+
+
+
+	<div class="agenda">
+		<div class="table-responsive">
+			<table class="table table-condensed table-bordered">
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Hora</th>
+						<th>Nombre profesor</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Single event in a single day -->
+					<tr th:each="reserva : ${reservas}">
+					
+						<td class="agenda-date active" rowspan="1">
+							<div class="dayofmonth" th:text="${#temporals.format(reserva.fechaHora, 'dd')}">26</div>
+							<div class="dayofweek" th:text="${#temporals.dayOfWeekName(reserva.fechaHora)}">Saturday</div>
+							<div class="shortdate text-muted" th:text="${#temporals.monthName(reserva.fechaHora)}">July, 2014</div>
+						</td>
+						<td class="agenda-time"><span th:text="${#temporals.format(reserva.fechaHora, 'HH:mm')}">5:30 AM</span> - <span th:text="${#temporals.format(reserva.fechaHoraEnd, 'HH:mm')}"></span></td>
+						<td class="agenda-events">
+							<div class="agenda-event">
+								<i class="glyphicon glyphicon-repeat text-muted"
+									title="Repeating event" ></i> <span th:text="${reserva.profesor.nombre}"></span>
+									<span th:text="${reserva.profesor.apellidos}"></span>
+							</div>
+						</td>
+					</tr>
+
+					<!-- Multiple events in a single day (note the rowspan) -->
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- CALENDARIO -->
+	<div id="calendar"></div>
+	<div th:each="reserva : ${listaReservas}">
+
+		<span class="fechasInicio" style="visibility: hidden;"
+			th:text="${reserva.fechaHora}"></span> <span class="fechasFinal"
+			style="visibility: hidden;" th:text="${reserva.fechaHora}"></span>
+
+	</div>
+
+
+
+	<!-- FORMULARIO RESERVAR FECHA -->
+
+	<!-- Default form contact -->
+
+	<div
+		class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 offset-lg-3 offset-md-3 offset-xl-3">
+
+		<form id="reservarSala" class="form rounded" role="form"
+			autocomplete="off" method="POST" th:action="@{/usuario/reservarSala/}"
+			th:object="${beanReserva}">
+
+			<h2 class="h4 mb-4" th:text="#{calendario.titulo}"></h2>
+
+
+
+			<!-- select salas -->
+			<label class="text-left" th:text="#{calendario.elegirSala}"></label>
+			<select class="browser-default custom-select mb-4"
+				th:field="*{nombreSala}">
+
+				<option th:each="type : ${listaSalas}" th:value="${{type.nombre}}"
+					th:text="${type.nombre}" th:field="*{nombreSala}">No hay
+					salas</option>
+
+			</select>
+			<!-- FECHA Y HORA INICIO -->
+
+			<div class="row">
+				<div class="form-group">
+					<label for="example-date-input" class="col-2 col-form-label"
+						th:text="#{calendario.diaInicio}"></label>
+					<div class="col-10">
+						<input class="form-control" type="date" value="2011-08-19"
+							id="example-date-input" th:field="*{diaInicio}">
+					</div>
+
+				</div>
+
+
+
+
+				<!--  
+				<div class="form-group ">
+					<label for="example-date-input" class="col-2 col-form-label">Día
+						Fin</label>
+					<div class="col-10">
+						<input class="form-control" type="date" value="2011-08-19"
+							id="example-date-input" th:field="*{diaFin}">
+					</div>
+
+				</div>
+				-->
+
+				<div class="form-group mt-4">
+					<label for="exampleFormControlSelect1"
+						th:text="#{calendario.horaInicio}"></label> <select
+						class="form-control" id="exampleFormControlSelect1"
+						th:field="*{horaInicio}">
+						<option th:field="*{horaInicio}" value="08:00">8:00</option>
+						<option th:field="*{horaInicio}" value="08:30">8:30</option>
+						<option th:field="*{horaInicio}" value="09:00">9:00</option>
+						<option th:field="*{horaInicio}" value="09:30">9:30</option>
+						<option th:field="*{horaInicio}" value="10:00">10:00</option>
+						<option th:field="*{horaInicio}" value="10:30">10:30</option>
+						<option th:field="*{horaInicio}" value="11:00">11:00</option>
+						<option th:field="*{horaInicio}" value="11:30">11:30</option>
+						<option th:field="*{horaInicio}" value="12:00">12:00</option>
+						<option th:field="*{horaInicio}" value="12:30">12:30</option>
+						<option th:field="*{horaInicio}" value="13:00">13:00</option>
+						<option th:field="*{horaInicio}" value="13:30">13:30</option>
+						<option th:field="*{horaInicio}" value="14:00">14:00</option>
+
+
+
+
+					</select>
+				</div>
+
+				<div class="form-group mt-4 pl-2">
+					<label for="exampleFormControlSelect2"
+						th:text="#{calendario.horaFin}"> reserva</label> <select
+						class="form-control" id="exampleFormControlSelect2"
+						th:field="*{horaFin}">
+
+						<option th:field="*{horaFin}" value="08:30">8:30</option>
+						<option th:field="*{horaFin}" value="09:00">9:00</option>
+						<option th:field="*{horaFin}" value="09:30">9:30</option>
+						<option th:field="*{horaFin}" value="10:00">10:00</option>
+						<option th:field="*{horaFin}" value="10:30">10:30</option>
+						<option th:field="*{horaFin}" value="11:00">11:00</option>
+						<option th:field="*{horaFin}" value="11:30">11:30</option>
+						<option th:field="*{horaFin}" value="12:00">12:00</option>
+						<option th:field="*{horaFin}" value="12:30">12:30</option>
+						<option th:field="*{horaFin}" value="13:00">13:00</option>
+						<option th:field="*{horaFin}" value="13:30">13:30</option>
+						<option th:field="*{horaFin}" value="14:00">14:00</option>
+						<option th:field="*{horaFin}" value="14:30">14:30</option>
+					</select>
+				</div>
+
+			</div>
+			<!-- FECHA Y HORA INICIO -->
+
+
+
+
+
+
+
+			<!-- Send button -->
+			<button class="btn btn-info btn-block" type="submit"
+				th:text="#{calendario.boton}"></button>
+		</form>
+		<!-- Default form contact -->
+	</div>
+	<!-- FIN FORMULARIO RESERVAR FECHA -->
+
+
+</body>
+</html>

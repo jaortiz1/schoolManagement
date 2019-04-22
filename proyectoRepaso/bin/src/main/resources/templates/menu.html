@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Pie de pagina mybooks</title>
+<meta charset="utf-8" />
+<meta name="description"
+	content="Pie de página  de MyBooks, facebook, twitter e instagran.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/style/proyecto.css">
+
+<script type="text/javascript" src="/script/proyecto.js"></script>
+<!--<script type="text/javascript" src="../static/script/proyecto.js"></script>  
+    
+    <link rel="stylesheet" type="text/css" href="../static/style/proyecto.css">-->
+
+</head>
+<body>
+	<div th:fragment="menuAdmin">
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<nav class="navbar navbar-expand-md navbar-light">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarTogglerDemo03"
+						aria-controls="navbarTogglerDemo03" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/login}">
+						<figure>
+							<img id="logo" src="/img/logo.png" alt="Logo salesianos" />
+						</figure>
+					</a>
+
+					<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+
+						<ul class="navbar-nav  ml-auto mt-2 mt-lg-0">
+							<li class="nav-item"><a class="nav-link" href="ebooks.html"
+								th:href="@{/usuario/misReservas}">Salas</a></li>
+							<li class="nav-item"><a class="nav-link" href="ebooks.html"
+								th:href="@{/admin/gestionSalas}">Gestión salas</a></li>
+							
+
+							<li class="nav-item"><a class="nav-link  active"
+								href="login.html" th:href="@{/admin/gestionUsuarios}">Gestion
+									usuarios<span class="sr-only">(current)</span>
+							</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="dondeEstamos.html" th:href="@{/admin/gestionDiasLectivos}">Gestión
+									días lectivos</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="preguntasFrecuentes" th:href="@{/login?logout}">Cerrar sesión</a></li>
+
+
+
+
+						</ul>
+
+					</div>
+				</nav>
+
+
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+</body>
+</html>

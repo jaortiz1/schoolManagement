@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Lista usuarios</title>
+<meta charset="utf-8" />
+<meta name="description" content="Se listan los usuarios de mybooks online, sevilla.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/style/proyecto.css">
+
+<script type="text/javascript" src="/script/proyecto.js"></script>
+<!--<script type="text/javascript" src="../static/script/proyecto.js"></script>  
+    
+    <link rel="stylesheet" type="text/css" href="../static/style/proyecto.css">-->
+<link rel="stylesheet" href="/style/iconate.min.css">
+<script type="text/javascript" src="/script/iconate.js"></script>
+</head>
+<body>
+<header>
+	<div class=" container-fluid px-0 mx-0">
+		<div class="row">
+			<div id="footerSuperior"
+				class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="row">
+					<div
+						class=" offset-md-1 offset-sm-1 offset-md-1 offset-lg-1 offset-xl-1">
+						<a href="www.twitter.com"><i
+							class="icono fab fa-twitter m-1 ml-5"></i></a> <a
+							href="www.facebook.com"><i
+							class="icono fab fa-facebook-square m-1"></i></a> <a
+							href="www.instagram.com"><i
+							class="icono fab fa-instagram m-1"></i></a> <a
+							href="https://plus.google.com/discover?hl=es"><i
+							class="icono fab fa-google-plus m-1"></i></a>
+					</div>
+				</div>
+
+
+
+
+
+			</div>
+
+		</div>
+	</header>
+		<div class="principal">
+
+
+			<div th:insert="~{menu :: menuAdmin}"></div>
+
+			
+
+			<hr />
+
+			<div class="container mb-5">
+				<h1 class="pl-0 ml-0">Administración de usuarios</h1>
+
+
+				<div class="row pl-0 ml-0">
+
+					<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+						<form class="form-inline my-2 my-lg-0" role="form" id="formularioBusqueda"  method="POST" th:action="@{'/admin/buscarUsuario/'}"
+							th:object="${usuarioBusqueda}">
+							<input class="form-control mr-sm-2" type="search"
+								aria-label="Search"  th:field="*{campoBusqueda}" placeholder="Email">
+							<button class="btn btn-outline-success my-2 my-sm-0"
+								type="submit">Buscar</button>
+
+						</form>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2">
+						<form id="prueba" class="form-inline my-2 my-lg-0" method="GET" th:action="@{'/admin/gestionUsuarios'}">
+							<button class="btn btn-outline-success my-2 my-sm-0 form-control"
+								type="submit">Mostrar todo</button>
+						</form>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+
+						<a th:href="@{'/admin/aniadirUsuario'}" 
+							class=" bg-white text-success"> <i style="font-size: 38px;" 
+							class="text-danger  fas fa-plus-square" id="icon"
+							> </i>
+
+						</a>
+
+
+
+					</div>
+
+				</div>
+
+				<!--tabla-->
+				<div class="row mt-5">
+					<div
+						class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 table-responsive">
+						<table id="example" class="table table-bordered">
+							<thead class="thead-dark">
+								<tr>
+									<th>Nombre</th>
+									<th>Apellidos</th>
+									<th>Email</th>
+									<th id="acciones">Acciones</th>
+									
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="usuario : ${lista}">
+
+
+									<td th:text="${usuario.nombre}"></td>
+									<td th:text="${usuario.apellidos}"></td>
+									<td th:text="${usuario.email}"></td>
+									
+									
+									<!-- borrar esto -->
+									
+									<td class="text-center">
+									<a href="#" class="fas fa-edit icon"
+										th:href="@{'/admin/editarUsuario/'+${usuario.id}}"> </a>
+									
+
+										
+										<a href="#" class="fas fa-trash-alt icon"
+										th:href="@{'/admin/eliminarUsuario/'+${usuario.id}}"> </a>
+										
+										<a href="#" class="fab fa-vimeo-v icon"
+										th:href="@{'/admin/activarUsuario/'+${usuario.id}}" th:if="${usuario.enabled==false}"> </a></td>
+
+									
+								</tr>
+
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+				<!--FIN tabla-->
+			</div>
+
+
+
+
+
+
+			<div th:insert="~{footer :: copy}"></div>
+
+
+
+		</div>
+		<script type="text/javascript">
+			var iconElement = document.getElementById('icon');
+			var options = {
+				from : 'fa-plus-circle',
+				to : 'fa-plus',
+				animation : 'rotateClockwise'
+			};
+			iconate(iconElement, options);
+		</script>
+</body>
+</html>

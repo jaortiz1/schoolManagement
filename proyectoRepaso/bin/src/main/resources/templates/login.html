@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login salesianos aulas, sevilla</title>
+<meta charset="utf-8" />
+<meta name="description" content="Registro y login usuario en mybooks online, sevilla.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/style/proyecto.css">
+
+<script type="text/javascript" src="/script/proyecto.js"></script>
+<!--<script type="text/javascript" src="../static/script/proyecto.js"></script>  
+    
+    <link rel="stylesheet" type="text/css" href="../static/style/proyecto.css">-->
+<link rel="stylesheet" type="text/css" href="/style/buttons.css">
+    <script type="text/javascript" src="/script/buttons.js"></script>
+
+</head>
+<body>
+<header>
+	<div class=" container-fluid px-0 mx-0">
+		
+</header>
+		<div class="principal">
+
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<nav class="navbar navbar-expand-md navbar-light">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarTogglerDemo03"
+						aria-controls="navbarTogglerDemo03" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/login}">
+						<figure>
+							<img id="logo" src="/img/logo.png" alt="Logo salesianos" />
+						</figure>
+					</a>
+
+					
+					</div>
+					</div>
+
+			<hr/>
+			<!--FORMULARIO LOGUEO-->
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div class="alert alert-danger alert-dismissible fade show"
+						th:if="${errorUsuario != null}">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<span th:text="${errorUsuario}"></span>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div class="alert alert-danger alert-dismissible fade show"
+						th:if="${errorDeLogueo != null}">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<span th:text="${errorDeLogueo}"></span>
+					</div>
+				</div>
+				<div id="login" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+
+
+					<div class="card rounded-0">
+						<div class="card-header">
+							<h3 class="mb-0">Iniciar sesión</h3>
+						</div>
+						<div class="card-body">
+							<form class="form rounded" role="form" autocomplete="off"
+								id="formularioLogin" method="POST" th:action="@{/login}">
+								
+								<div class="form-group">
+									<label for="email">Correo electrónico <span
+										class="text-danger">*</span></label> <input type="email"
+										placeholder="ejemplo@gmail.com" id="username"
+										class="form-control form-rounded correo" name="username" required>
+									<div class="invalid-feedback">Oops, you missed this one.</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="control-label">Contraseña
+										<span class="text-danger">*</span>
+									</label> <input type="password" class="form-control  form-rounded" required
+										id="password" name="password" minlength="4" maxlength="12" >
+									<div class="invalid-feedback">Enter your password too!</div>
+								</div>
+
+								
+
+
+
+								
+
+								<div class="row">
+									<div
+										class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5 float-left">
+										<a href="https://www.google.es">
+											<button type="submit" value= "Log in"
+												class="btn btn-success btn-lg  form-rounded form-control button button-3d-action  button-rounded">Iniciar
+												sesión</button>
+										</a>
+									</div>
+
+									<div
+										class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5  	 offset-xl-1">
+										<button type="reset"
+											class="bg-primary btn btn-success btn-lg  form-control form-rounded button button-3d-primary button-rounded"
+											id="botonCrear">Crear cuenta</button>
+									</div>
+								</div>
+
+
+
+							</form>
+						</div>
+						<!--/card-block-->
+					</div>
+					<!-- /form card login -->
+
+
+				</div>
+
+				<!--FIN FORMULARIO LOGUEO-->
+				<!--FORMULARIO CREACION CUENTA-->
+
+				<div id="creacionCuenta"
+					class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 offset-md-0 offset-lg-1 offset-xl-1 oculto">
+
+					<div class="card rounded-0">
+						<div class="card-header">
+							<h3 class="mb-0">Creación de cuenta</h3>
+						</div>
+						<div class="card-body">
+							<form id="creacionUsuarioFormulario" class="form rounded" role="form" autocomplete="off"
+								method="POST" th:action="@{/crearUsuario}" th:object="${user}">
+								<div class="form-group">
+									<label for="uname1">Correo electrónico <span
+										class="text-danger correo">*</span></label> <input type="email" id="correo1"
+										placeholder="ejemplo@gmail.com"
+										class="form-control form-rounded correo" name="usuarioCreacion"
+										required th:field="*{email}">
+									<div class="invalid-feedback">Oops, you missed this one.</div>
+								</div>
+
+								<div class="form-group">
+									<label for="uname1">Confirmar correo electrónico <span
+										class="text-danger">*</span></label> <input type="email" id="correo2"
+										placeholder="ejemplo@gmail.com"
+										class="form-control form-rounded" name="usuarioCreacion2"
+										required>
+									<div class="invalid-feedback">Oops, you missed this one.</div>
+								</div>
+								<div class="form-group">
+									<label for="dni">Dni <span
+										class="text-danger ">*</span></label> <input type="text" id="dni"
+										placeholder="8 Números 1 letra"
+										class="form-control form-rounded correo2" name="dni"
+										required th:field="*{dni}">
+									<div class="invalid-feedback">Oops, you missed this one.</div>
+								</div>
+								<div class="form-group">
+									<label for="nombre">Nombre <span
+										class="text-danger ">*</span></label> <input type="text" id="nombre"
+										placeholder="Nombre"
+										class="form-control form-rounded correo2" name="nombre"
+										required th:field="*{nombre}">
+									<div class="invalid-feedback">Oops, you missed this one.</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="apellido1">Apellidos <span
+										class="text-danger ">*</span></label> <input type="text" id="apellidos"
+										placeholder="Apellidos"
+										class="form-control form-rounded correo2" name="apellido1"
+										required th:field="*{apellidos}">
+									<div class="invalid-feedback">Oops, you missed this one.</div>
+								</div>
+
+								<div class="form-group">
+									<label>Contraseña <span class="text-danger">*</span></label> <input
+										type="password" class="form-control  form-rounded" id="pwd1"
+										name="passwordCreacion" required th:field="*{password}" placeholder="De 8-12 carácteres" minlength="8" maxlength="12">
+									<div class="invalid-feedback">Enter your password too!</div>
+								</div>
+
+								<div class="form-group">
+									<label>Confirmar contraseña <span class="text-danger">*</span></label>
+									<input type="password" class="form-control  form-rounded"
+										id="pwd2" name="passwordCreacion2" required minlength="8" maxlength="12">
+									<div class="invalid-feedback">Enter your password too!</div>
+								</div>
+
+
+
+								<div class="row">
+									<div
+										class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ml-0 pl-0">
+										<a class="btn btn-link" href="/password/reset">¿Olvidó su
+											contraseña?</a>
+									</div>
+								</div>
+
+								<div class="row">
+
+
+									<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5">
+										<a href="http://salesianos-triana.tutormoodle.com/">
+											<button type="submit"
+												class="bg-primary btn btn-success btn-lg  form-control form-rounded button button-3d-primary button-rounded">Crear
+												cuenta</button>
+										</a>
+									</div>
+								</div>
+
+
+
+							</form>
+						</div>
+						<!--/card-block-->
+					</div>
+					<!-- /form card login -->
+
+				</div>
+				<!--FIN FORMULARIO CREACION CUENTA-->
+				
+				
+
+			</div>
+		</div>
+		<div th:insert="~{footer :: copy}"></div>
+
+
+	</div>
+
+</body>
+</html>

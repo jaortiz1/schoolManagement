@@ -1,0 +1,206 @@
+.pagination-centered {
+    text-align: center;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.pointer-disabled {
+    pointer-events: none;
+}
+.idOculto{
+	visibility: hidden;
+}
+
+
+.container-fluid{
+	padding: 0px;
+}
+.principal{
+	width: 80%;
+	margin: 0 auto;
+	height: 80%;
+}
+#logo{
+	width: 150px;
+}
+
+#carrito{
+	font-size: 40px;
+}
+#prueba{
+  	width: 100%;
+
+}
+#prueba2{
+  	width: 70%;
+}
+#prueba3{
+	width: 100%;
+}
+#login{
+
+}
+.oculto{
+	display: none;
+
+}
+.visible{
+	display: block;
+}
+#footerSuperior{
+	background-color: black;
+	height: 23px;
+}
+.icono{
+	color: white;
+}
+#publicidad2{
+	width: 100%;
+}
+footer{
+	
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 0.8em;
+
+}
+
+@media all and (max-width : 768px) {
+	#prueba{
+  	width: 100%;
+	}
+	/*footer{
+	
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+
+}*/
+	
+}
+
+
+.dropdown .dropdown-menu {
+    
+    transition: all 0.7s;
+
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.dropdown:hover .dropdown-menu{
+    max-height: 200px;
+    opacity: 1;
+}
+
+.icono2{
+    text-align: center;
+    color: black;
+    font-size: 1.1em;
+
+}
+#acciones{
+    width: 10%;
+}
+.tachado{
+    text-decoration: line-through;
+}
+#carritoGrande{
+    font-size: 1.7em;
+
+}
+a:link{
+    color: black;
+    text-decoration: none;
+}
+#eliminar{
+    color: none;
+    background-color: transparent;
+
+}
+.portadaLibro{
+    width: 10%;
+}
+
+.colorCorporativo{
+    color: #96DBF7FF;
+}
+.letraGrande{
+    font-size: 1.2em;
+}
+.cesta{
+    height: 130px;
+    background-color: #f9fafc;
+    
+}
+
+
+.iconoEliminar{
+    width: 13px;
+    height: 16px;
+
+}
+.verMas{
+    background-color: #eaebed;
+}
+.oculto{
+    display: none;
+}
+.imagenBusqueda{
+    width: 30%;
+}
+.textoPreguntas{
+    font-size: 0.8em;
+}
+.oficina{
+    width: 75%;
+}
+
+.invalid{
+    border: 1px solid red;
+
+}
+
+.valid{
+    border: 1px solid green;
+}
+
+.drop-element {
+  // Set the initial state for our animation
+  opacity: 0;
+}
+.drop-element.drop-open-transitionend {
+  // Show our drop while it's open and while the transition is going on
+  display: block;
+}
+.drop-element.drop-after-open {
+  -webkit-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  transition: opacity 1s;
+
+  opacity: 1;
+}
+
+#granim-canvas {
+	z-index: -9999;
+	height: 100%;
+}
+.icon{
+	font-size: 1.1em;
+}

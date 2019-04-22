@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Añadir usuario</title>
+<meta charset="utf-8" />
+<meta name="description" content="Se añaden usuarios, panel administrador, mybooks online, sevilla.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/style/proyecto.css">
+
+<!-- <script type="text/javascript" src="/script/proyecto.js"></script>-->
+<!--<script type="text/javascript" src="../../static/script/proyecto.js" ></script>  
+    
+    <link rel="stylesheet" type="text/css" href="../../static/style/proyecto.css">-->
+    <link rel="stylesheet" type="text/css" href="/style/buttons.css">
+    <script type="text/javascript" src="/script/buttons.js"></script>
+
+</head>
+<body>
+<header>
+	<div class=" container-fluid px-0 mx-0">
+		<div class="row">
+			<div id="footerSuperior"
+				class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				<div class="row">
+					<div
+						class=" offset-md-1 offset-sm-1 offset-md-1 offset-lg-1 offset-xl-1">
+						<a href="www.twitter.com"><i
+							class="icono fab fa-twitter m-1 ml-5"></i></a> <a
+							href="www.facebook.com"><i
+							class="icono fab fa-facebook-square m-1"></i></a> <a
+							href="www.instagram.com"><i
+							class="icono fab fa-instagram m-1"></i></a> <a
+							href="https://plus.google.com/discover?hl=es"><i
+							class="icono fab fa-google-plus m-1"></i></a>
+					</div>
+				</div>
+
+
+
+
+
+			</div>
+
+		</div>
+</header>
+		<div class="principal">
+
+
+
+			<!--MENU-->
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<nav class="navbar navbar-expand-md navbar-light">
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarTogglerDemo03"
+							aria-controls="navbarTogglerDemo03" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<a class="navbar-brand" th:href="@{/}"> <figure><img id="logo"
+							src="/img/logo.png" alt="Logo ibooks" /></figure>
+						</a>
+
+						<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+
+							<ul class="navbar-nav  ml-auto mt-2 mt-lg-0">
+								<li class="nav-item"><a class="nav-link" href="ebooks.html"
+									th:href="@{/}">Inicio</a></li>
+								<li class="nav-item"><a class="nav-link" href="ebooks.html"
+									th:href="@{ebook}">Catálogo Ebooks</a></li>
+
+								<li class="nav-item"><a class="nav-link  active"
+									href="login.html" th:href="@{login}">Iniciar Sesión/Crear
+										cuenta <span class="sr-only">(current)</span>
+								</a></li>
+
+								<li class="nav-item"><a class="nav-link"
+									href="dondeEstamos.html" th:href="@{dondeEstamos}">¿Dónde
+										estamos?</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="preguntasFrecuentes">Preguntas frecuentes</a></li>
+
+								<ul class="navbar-nav mt-2 mt-lg-0" th:if="${usuario != null}">
+									<li class="nav-item dropdown"><a
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										href="#">Mi cuenta</a>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="editarPerfil.html"
+												th:href="@{/usuario/editarPerfil}">Editar perfil</a> <a
+												class="dropdown-item" href="misPedidos.html"
+												th:href="@{/usuario/verMisPedidos}">Mis pedidos</a> <a
+												class="dropdown-item" href="aniadirSaldo.html"
+												th:href="@{/usuario/aniadirSaldo}">Añadir saldo</a> <a
+												class="dropdown-item" href="/desloguearse">Cerrar sesión</a>
+										</div></li>
+
+									<li class="nav-item dropdown" th:if="${usuario.superAdmin}"><a
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										href="#">Administración</a>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="administracionUsuarios.html"
+												th:href="@{/admin/administracionUsuarios}">Usuarios</a> <a
+												class="dropdown-item" href="administracionLibros.html"
+												th:href="@{/admin/administracionLibros}">Libros</a> 
+										</div></li>
+								</ul>
+								<li class="nav-item">
+								
+								
+								<a
+									class="nav-link fas fa-shopping-cart" id="carrito"
+									th:href="@{usuario/carrito}"> 
+									<span  th:if="${session.carrito!=null}"><span class="badge d-inline" th:text="${session.carrito.size()}"></span></span>
+									
+									</a>
+									</li>
+
+							</ul>
+
+						</div>
+					</nav>
+
+
+
+
+
+				</div>
+
+			</div>
+
+			<!--fin menu-->
+			
+			<hr />
+
+
+
+			<div class="container">
+				<h1>Añadir sala</h1>
+
+				<hr>
+				<div class="row">
+			
+					<!-- left column -->
+
+
+					<!-- FORMULARIO DATOS PERSONALES -->
+					<div id="datosSalas"
+						class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 personal-info">
+						<div class="alert alert-info alert-dismissable">
+							<a class="panel-close close" data-dismiss="alert">×</a> <i
+								class="fa fa-coffee"></i> Todos los campos son obligatorios.
+						</div>
+						
+						<div class="row col-md-4">
+						<h2 class="mb-3">Creación sala</h2>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div class="alert alert-danger alert-dismissible fade show" th:if="${errorSala != null}">
+					    <button type="button" class="close" data-dismiss="alert">&times;</button>
+					    	<span th:text="${errorSala}"></span>
+					 </div>
+				</div>
+
+						<form class="form-horizontal" role="form" id="creacionUsuarioFormulario"
+							method="POST" th:action="@{'/admin/editarSalaPost/'+${editSala.id}}"
+							th:object="${editSala}">
+
+							
+							<div class="form-group">
+								<label for="mail">Nombre de la sala <span
+									class="text-danger">*</span></label> <input type="text"
+									placeholder="Aula-01"
+									class="form-control form-rounded correo" id="nombreSala" required
+									th:field="*{nombre}">
+								<div class="invalid-feedback ">Oops, you missed this one.</div>
+								
+								
+							</div>
+
+							
+							
+
+
+
+
+							
+							<div class="form-group">
+
+								
+								<div class="mt-3">
+									<input type="submit" class="button button-3d-action button-pill form-control"
+										value="Guardar">
+								</div>
+							</div>
+
+
+
+
+						</form>
+					</div>
+					<!--FIN FORMULARIO DATOS PERSONALES-->
+
+				
+				</div>
+			</div>
+
+
+			
+
+
+			<hr>
+			<div th:insert="~{footer :: copy}"></div>
+
+
+
+
+		</div>
+</body>
+</html>
